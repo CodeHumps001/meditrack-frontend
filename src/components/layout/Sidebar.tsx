@@ -23,7 +23,7 @@ export function Sidebar({ items }: { items: NavItem[] }) {
     user?.firstName?.charAt(0) || user?.lastName?.charAt(0) || "M";
 
   return (
-    <aside className="flex h-screen w-full flex-col bg-white dark:bg-neutral-900 border-r border-neutral-200/80 dark:border-neutral-800/60 transition-colors duration-200">
+    <aside className="flex h-screen w-full flex-col bg-white dark:bg-neutral-900 border-r border-neutral-200/80 dark:border-neutral-800/60 transition-colors duration-200 overflow-hidden">
       {/* Brand Header Identity */}
       <div className="flex h-16 shrink-0 items-center gap-2.5 px-6 border-b border-neutral-100 dark:border-neutral-800/80 bg-white dark:bg-neutral-900">
         <div className="h-8 w-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center shadow-sm shadow-emerald-100 dark:shadow-none shrink-0">
@@ -39,8 +39,8 @@ export function Sidebar({ items }: { items: NavItem[] }) {
         </div>
       </div>
 
-      {/* Navigation Layer */}
-      <nav className="flex-1 space-y-1.5 px-4 py-6 overflow-y-auto">
+      {/* Navigation Layer - Takes remaining space and scrolls smoothly internally */}
+      <nav className="flex-1 space-y-1.5 px-4 py-6 overflow-y-auto min-h-0">
         {items.map((item) => {
           const active =
             pathname === item.href || pathname.startsWith(item.href + "/");
@@ -70,8 +70,8 @@ export function Sidebar({ items }: { items: NavItem[] }) {
         })}
       </nav>
 
-      {/* Footnote Identity Profiler & Context Action Shell */}
-      <div className="border-t border-neutral-100 dark:border-neutral-800/80 bg-white dark:bg-neutral-900 p-4 space-y-3">
+      {/* Footnote Identity Profiler & Action Shell - Locked to the bottom using shrink-0 */}
+      <div className="shrink-0 border-t border-neutral-100 dark:border-neutral-800/80 bg-white dark:bg-neutral-900 p-4 space-y-3 mt-auto">
         {/* Flat Profile Information Card Grid */}
         <div className="flex items-center gap-3 rounded-xl border border-neutral-200/80 dark:border-neutral-800 p-3 bg-neutral-50/50 dark:bg-neutral-950/40">
           <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 font-bold text-xs text-neutral-800 dark:text-neutral-200 uppercase select-none">

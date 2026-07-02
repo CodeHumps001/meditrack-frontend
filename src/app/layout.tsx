@@ -91,8 +91,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="h-full w-full overflow-hidden m-0 p-0">
-      <body className="h-full w-full overflow-hidden m-0 p-0 antialiased bg-white dark:bg-zinc-950">
+    <html lang="en" className="scroll-smooth">
+      {/* 💡 Keep overflow off the body so public pages can scroll! */}
+      <body className="min-h-screen bg-neutral-50 dark:bg-neutral-950 antialiased">
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>

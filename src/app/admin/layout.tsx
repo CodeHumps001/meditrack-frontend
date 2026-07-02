@@ -66,9 +66,9 @@ export default function AdminLayout({
   }
 
   return (
-    <div className="grid min-h-screen grid-cols-1 md:grid-cols-[16rem_1fr] bg-white dark:bg-zinc-950 antialiased transition-colors duration-200 overflow-hidden">
+    <div className="grid h-screen w-screen grid-cols-1 md:grid-cols-[16rem_1fr] bg-white dark:bg-zinc-950 antialiased transition-colors duration-200 overflow-hidden">
       {/* Desktop Persistent Sidebar Column */}
-      <aside className="hidden md:block h-screen overflow-y-auto sticky top-0 border-r border-zinc-100 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-zinc-900/20">
+      <aside className="hidden md:block h-screen shrink-0 border-r border-zinc-100 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-zinc-900/20">
         <Sidebar items={NAV_ITEMS} />
       </aside>
 
@@ -88,7 +88,7 @@ export default function AdminLayout({
 
         {/* Drawer Slide Element */}
         <div
-          className={`absolute inset-y-0 left-0 w-64 bg-white dark:bg-zinc-900 shadow-2xl transition-transform duration-300 ease-in-out transform ${
+          className={`absolute inset-y-0 left-0 w-64 h-full bg-white dark:bg-zinc-900 shadow-2xl transition-transform duration-300 ease-in-out transform ${
             sidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
@@ -106,7 +106,7 @@ export default function AdminLayout({
       </div>
 
       {/* Primary Context Flex Viewport Shell */}
-      <div className="flex flex-col h-screen overflow-hidden">
+      <div className="flex flex-col h-screen overflow-hidden min-w-0">
         {/* Mobile Viewport Header Infrastructure */}
         <header className="flex h-14 shrink-0 items-center justify-between border-b border-zinc-100 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/50 backdrop-blur-md px-6 md:hidden">
           <div className="flex items-center gap-3">
@@ -128,7 +128,7 @@ export default function AdminLayout({
         </header>
 
         {/* Core Scrolling Content Area */}
-        <main className="flex-1 overflow-y-auto px-2 py-3 md:p-10 bg-zinc-50/30 dark:bg-zinc-950/10">
+        <main className="flex-1 overflow-y-auto px-4 py-6 md:p-10 bg-zinc-50/30 dark:bg-zinc-950/10">
           <div className="w-full mx-auto max-w-full animate-in fade-in slide-in-from-bottom-2 duration-300">
             {children}
           </div>

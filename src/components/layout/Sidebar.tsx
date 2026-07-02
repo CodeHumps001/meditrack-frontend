@@ -40,7 +40,7 @@ export function Sidebar({ items }: { items: NavItem[] }) {
       </div>
 
       {/* Navigation Layer - Scrolls dynamically internally */}
-      <nav className="flex-1 space-y-1.5 px-4 py-6 overflow-y-auto min-h-0">
+      <nav className="flex-1 space-y-1.5 px-4 py-8 overflow-y-auto min-h-0">
         {items.map((item) => {
           const active =
             pathname === item.href || pathname.startsWith(item.href + "/");

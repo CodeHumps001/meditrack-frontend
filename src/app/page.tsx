@@ -21,6 +21,10 @@ import {
   Github,
   Twitter,
   Linkedin,
+  LogOut,
+  User,
+  Settings,
+  HelpCircle,
 } from "lucide-react";
 
 // --- Mock Data ---
@@ -103,7 +107,7 @@ export default function RootPage() {
   const dashboardLink = user
     ? isAdminRole(user.role)
       ? "/admin/dashboard"
-      : "/dashboard"
+      : "/employee/dashboard"
     : "/login";
 
   useEffect(() => {
@@ -147,7 +151,7 @@ export default function RootPage() {
           >
             <Link
               href="/"
-              className="flex items-center gap-2 select-none active:scale-98 transition-transform"
+              className="flex items-center gap-2 select-none active:scale-98 transition-transform flex-shrink-0"
             >
               <div
                 className={`flex items-center justify-center rounded-xl bg-emerald-500 text-neutral-950 shadow-md shadow-emerald-500/20 transition-all duration-300 ease-in-out ${
@@ -206,7 +210,8 @@ export default function RootPage() {
               </a>
             </nav>
 
-            <div className="flex items-center gap-4">
+            {/* Desktop Auth Buttons */}
+            <div className="hidden md:flex items-center gap-4">
               {loading ? (
                 <div className="h-5 w-5 animate-spin rounded-full border-2 border-emerald-500 border-t-transparent" />
               ) : user ? (
@@ -242,17 +247,31 @@ export default function RootPage() {
               )}
             </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-neutral-500 dark:text-zinc-400 hover:text-neutral-900 dark:hover:text-white transition-colors ml-2"
-            >
-              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
+            {/* Mobile Menu Button - Hide when user is logged in */}
+            {!user && (
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden p-2 text-neutral-500 dark:text-zinc-400 hover:text-neutral-900 dark:hover:text-white transition-colors ml-2"
+                aria-label="Toggle menu"
+              >
+                {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              </button>
+            )}
+
+            {/* Mobile Dashboard Button - Show when user is logged in */}
+            {user && (
+              <Link
+                href={dashboardLink}
+                className="md:hidden flex items-center gap-1.5 px-3 h-8 rounded-xl bg-emerald-600 text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 hover:bg-emerald-500"
+              >
+                <LayoutDashboard size={14} />
+                Dashboard
+              </Link>
+            )}
           </div>
 
-          {/* Mobile Dropdown Panel */}
-          {mobileMenuOpen && (
+          {/* Mobile Dropdown Panel - Only show for non-logged in users */}
+          {!user && mobileMenuOpen && (
             <div className="md:hidden border-b border-neutral-200 dark:border-white/5 bg-neutral-50 dark:bg-neutral-950 px-4 py-6 space-y-4 text-sm font-bold uppercase tracking-wide">
               <a
                 href="#features"
@@ -284,32 +303,20 @@ export default function RootPage() {
               </a>
               <hr className="border-neutral-200 dark:border-white/5" />
               <div className="pt-2 flex flex-col gap-3">
-                {user ? (
-                  <Link
-                    href={dashboardLink}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="text-emerald-600 dark:text-emerald-400"
-                  >
-                    Dashboard →
-                  </Link>
-                ) : (
-                  <>
-                    <Link
-                      href="/login"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="text-neutral-500 dark:text-zinc-400"
-                    >
-                      Sign In
-                    </Link>
-                    <Link
-                      href="/register"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="text-emerald-600 dark:text-emerald-400"
-                    >
-                      Setup System
-                    </Link>
-                  </>
-                )}
+                <Link
+                  href="/login"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-neutral-500 dark:text-zinc-400 hover:text-neutral-900 dark:hover:text-white"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/register"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-emerald-600 dark:text-emerald-400"
+                >
+                  Setup System
+                </Link>
               </div>
             </div>
           )}

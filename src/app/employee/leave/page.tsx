@@ -120,7 +120,7 @@ export default function LeavePage() {
   return (
     <div className="w-full text-neutral-800 dark:text-zinc-100 bg-white dark:bg-zinc-950 min-h-screen transition-colors duration-200">
       {/* Top Banner Header Section */}
-      <div className="mb-8 flex items-center justify-between pb-4 border-b border-neutral-100 dark:border-zinc-800/60">
+      <div className="mb-8 flex flex-col gap-4 pb-6 border-b border-neutral-100 dark:border-zinc-800/60 sm:flex-row sm:items-center sm:justify-between sm:pb-4">
         <div>
           <h1 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-white uppercase tracking-wider">
             Leave Ledger
@@ -133,7 +133,7 @@ export default function LeavePage() {
 
         <button
           onClick={() => setModalOpen(true)}
-          className="inline-flex items-center gap-1.5 h-9 px-4 rounded-xl bg-neutral-900 hover:bg-neutral-800 dark:bg-zinc-100 dark:hover:bg-zinc-200 text-white dark:text-neutral-950 text-xs font-bold uppercase tracking-wider shadow-sm transition-all active:scale-[0.98]"
+          className="inline-flex items-center justify-center gap-1.5 h-9 px-4 rounded-xl bg-neutral-900 hover:bg-neutral-800 dark:bg-zinc-100 dark:hover:bg-zinc-200 text-white dark:text-neutral-950 text-xs font-bold uppercase tracking-wider shadow-sm transition-all active:scale-[0.98] w-full sm:w-auto"
         >
           <Plus size={14} strokeWidth={2.5} />
           <span>Apply for leave</span>
@@ -175,7 +175,8 @@ export default function LeavePage() {
           </span>
         </div>
 
-        <div className="overflow-x-auto">
+        {/* DESKTOP VIEW: Standard Table layout (Hidden on mobile screens) */}
+        <div className="hidden sm:block overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
               <tr className="border-b border-neutral-100 dark:border-zinc-800/60 text-[10px] font-bold text-neutral-400 dark:text-zinc-500 uppercase tracking-wider">
@@ -240,6 +241,58 @@ export default function LeavePage() {
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* MOBILE VIEW: Cards stack layout (Hidden on desktop monitors) */}
+        <div className="block sm:hidden divide-y divide-neutral-100 dark:divide-zinc-800/60">
+          {requests.length === 0 ? (
+            <div className="px-5 py-12 text-center text-neutral-400 dark:text-zinc-500 text-xs font-medium">
+              No active departure request logs detected in database roster.
+            </div>
+          ) : (
+            requests.map((r) => (
+              <div
+                key={r.id}
+                className="p-5 space-y-3 bg-white/40 dark:bg-transparent"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-neutral-900 dark:text-white">
+                    {r.leaveType}
+                  </span>
+                  <Badge status={r.status} />
+                </div>
+
+                <div className="flex items-center justify-between text-[11px] font-medium text-neutral-500 dark:text-zinc-400">
+                  <div className="font-mono">
+                    {new Date(r.startDate).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                    })}{" "}
+                    –{" "}
+                    {new Date(r.endDate).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </div>
+                  <div className="font-mono bg-neutral-100 dark:bg-zinc-800 px-2 py-0.5 rounded-md">
+                    {r.totalDays} days
+                  </div>
+                </div>
+
+                {r.status === "PENDING" && (
+                  <div className="pt-1 flex justify-end">
+                    <button
+                      onClick={() => handleCancel(r.id)}
+                      className="w-full text-center py-2 rounded-lg bg-red-50 hover:bg-red-100 dark:bg-red-950/20 dark:hover:bg-red-950/40 text-[10px] font-bold uppercase tracking-wider text-red-600 dark:text-red-400 outline-none transition-colors cursor-pointer border-none"
+                    >
+                      Cancel Block
+                    </button>
+                  </div>
+                )}
+              </div>
+            ))
+          )}
         </div>
       </div>
 

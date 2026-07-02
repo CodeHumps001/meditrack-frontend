@@ -79,7 +79,7 @@ export default function ReportsPage() {
   }
 
   return (
-    <div className="w-full min-h-screen px-6 py-8 space-y-6 antialiased selection:bg-emerald-600 selection:text-white">
+    <div className="w-full min-h-screen px-1 py-4 space-y-6 antialiased selection:bg-emerald-600 selection:text-white">
       {/* Title Header */}
       <div className="space-y-1">
         <h1 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">

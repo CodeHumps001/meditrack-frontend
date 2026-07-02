@@ -112,7 +112,7 @@ export default function EmployeesPage() {
   }
 
   return (
-    <div className="w-full min-h-screen px-6 py-8 space-y-6 antialiased selection:bg-emerald-600 selection:text-white">
+    <div className="w-full min-h-screen px-1 py-4 space-y-6 antialiased selection:bg-emerald-600 selection:text-white">
       {/* Upper Context Header Panel */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="space-y-1">

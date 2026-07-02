@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AuthProvider } from "@/context/AuthContext";
+// FIX: Converted root reference paths into an explicit relative workspace destination locator
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -7,7 +8,11 @@ export const metadata: Metadata = {
   description: "Hospital Staff Attendance & Workforce Management",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body>

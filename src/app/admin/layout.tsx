@@ -128,8 +128,8 @@ export default function AdminLayout({
         </header>
 
         {/* Core Scrolling Content Area */}
-        <main className="flex-1 overflow-y-auto px-6 py-8 md:p-10 bg-zinc-50/30 dark:bg-zinc-950/10">
-          <div className="w-full mx-auto max-w-5xl animate-in fade-in slide-in-from-bottom-2 duration-300">
+        <main className="flex-1 overflow-y-auto px-2 py-3 md:p-10 bg-zinc-50/30 dark:bg-zinc-950/10">
+          <div className="w-full mx-auto max-w-full animate-in fade-in slide-in-from-bottom-2 duration-300">
             {children}
           </div>
         </main>

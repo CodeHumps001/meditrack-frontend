@@ -95,7 +95,7 @@ export default function BackupsPage() {
   }
 
   return (
-    <div className="w-full min-h-screen px-6 py-8 space-y-6 antialiased selection:bg-emerald-600 selection:text-white bg-neutral-50 dark:bg-neutral-950">
+    <div className="w-full min-h-screen px-1 py-4 space-y-6 antialiased selection:bg-emerald-600 selection:text-white bg-neutral-50 dark:bg-neutral-950">
       {/* Dynamic Action Section Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="space-y-1">

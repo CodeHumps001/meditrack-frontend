@@ -116,7 +116,7 @@ export default function EmployeeDetailPage() {
   }
 
   return (
-    <div className="w-full min-h-screen px-6 py-8 space-y-6 antialiased selection:bg-emerald-600 selection:text-white">
+    <div className="w-full min-h-screen px-1 py-4 space-y-6 antialiased selection:bg-emerald-600 selection:text-white">
       {/* Navigation Return Button */}
       <div>
         <button
